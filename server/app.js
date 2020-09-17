@@ -1,9 +1,7 @@
 var app = require('express')();
 var http = require('http').createServer(app);
-var io = require('socket.io')(http);
-
-
-
+var io = require('socket.io')(http)
+const port = 3000
 
 app.get('/', (req, res) => {
   res.send(`ready to start`);
@@ -25,11 +23,11 @@ io.on('connection', (socket) => {
     if (player.length === 2){
       playerFirst += player[Math.round(Math.random()*2)].username
       socket.emit('firstTurn',playerFirst)
-    }else{}
+    }
   })
 
   socket.on('word',(word)=>{
-    message += word
+    message = word
     let wordArr = word.split('')
     let sendArr = []
     let count = 0
@@ -46,14 +44,30 @@ io.on('connection', (socket) => {
     counter++
   })
   socket.on('answer',(payload)=>{
-    if (message === payload){
-      
+    if (message === payload.message){
+      for(const el of player){
+        if(el.username === payload.username){
+          el.points += 10
+          io.emmit('getPoint', el)
+          word = ''
+          break
+        }
+      }
+    } else {
+      for(const el of player){
+        if(el.username !== payload.username){
+          el.points += 10
+          io.emmit('getPoint', el)
+          word = ''
+          break
+        }
+      }
     }
   })
 });
 
-http.listen(3000, () => {
-  console.log('listening on *:3000');
+http.listen(port, () => {
+  console.log(`listening on *:${port}`);
 });
 
 
