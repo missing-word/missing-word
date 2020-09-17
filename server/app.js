@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
       for(const el of player){
         if(el.username === payload.username){
           el.points += 10
-          io.emmit('getPoint', el)
+          socket.emmit('getPoint', el)
           word = ''
           break
         }
@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
       for(const el of player){
         if(el.username !== payload.username){
           el.points += 10
-          io.emmit('getPoint', el)
+          socket.broadcast.emmit('getPoint', el)
           word = ''
           break
         }
