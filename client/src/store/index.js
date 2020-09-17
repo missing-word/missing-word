@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import VueSocketIO from 'vue-socket.io'
+import router from '../router'
 
 Vue.use(Vuex)
 
@@ -38,7 +38,10 @@ export default new Vuex.Store({
       if(playload === state.username){
         state.isYourTurn = true
       }
-    }
+    },
+    setUsername(state, username) {
+      state.username = username;
+    },
   },
   actions: {
     setWord ({ commit }, payload) {
@@ -48,11 +51,12 @@ export default new Vuex.Store({
       }
       commit('SET_WORD', result)
     },
-    sendWord ({ commit }) {
-      
-    },
-    sendAnswer ({ commit }) {
-
+    SOCKET_firstTurn({ state }, payload) {
+      if (state.username === payload) {
+        router.push({ name: 'Play' })
+      } else {
+        router.push({ name: 'Waiting' })
+      }
     }
   },
   modules: {

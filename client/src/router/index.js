@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Play from '../views/Play.vue'
+import Lobby from '../views/Lobby.vue'
+import Waiting from '../views/Waiting.vue'
 
 Vue.use(VueRouter)
 
@@ -12,9 +14,19 @@ const routes = [
     component: Home
   },
   {
+    path: '/lobby',
+    name: 'Lobby',
+    component: Lobby,
+  },
+  {
     path: '/play',
     name: 'Play',
     component: Play
+  },
+  {
+    path: '/waiting',
+    name: 'Waiting',
+    component: Waiting,
   }
 ]
 
