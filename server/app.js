@@ -1,7 +1,7 @@
 var app = require("express")();
 var http = require("http").createServer(app);
 var io = require("socket.io")(http);
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 app.get("/", (req, res) => {
   res.send(`ready to start`);
