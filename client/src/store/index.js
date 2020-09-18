@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router'
+import Swal from 'sweetalert2'
 
 Vue.use(Vuex)
 
@@ -13,7 +14,10 @@ export default new Vuex.Store({
     missingWord: [],
     answer: '',
     username: '',
-    points: 0
+    points: 0,
+    nilaiLawanA: 0,
+    nilaiLawanB: 0,
+    // letStart: false
 
   },
   mutations: {
@@ -46,24 +50,29 @@ export default new Vuex.Store({
     },
     setUsername(state, username) {
       state.username = username;
+    },
+    SOCKET_salah (state,payload) {
+      state.nilaiLawanA += 10
+      Swal.fire(payload)
+    },
+    SOCKET_benar (state,payload) {
+      state.nilaiLawanB += 10
+      Swal.fire(payload)
+    },
+    SET_EMPTY_DATA (state,payload) {
+      state.missingWord = payload
     }
+    // SOCKET_letStart (state, payload){
+    
+    // }
   },
   actions: {
-    // setWord ({ commit }, payload) {
-    //   let result = []
-    //   for(let i = 0; i < payload.length; i++){
-    //     result.push(payload[i])
-    //   }
-    //   commit('SET_WORD', result)
-    // }
-    // SOCKET_firstTurn({ state }, payload) {
-    //   console.log(payload)
-    //   if (state.username !== payload) {
-    //     state.commit('SET_IS_YOUR_TURN', false)
-    //   } else {
-    //     state.commit('SET_IS_YOUR_TURN', true)
-    //   }
-    // }
+    SOCKET_notifBenar ({ commit }, payload) {
+     Swal.fire(payload)
+    },
+    SOCKET_notifSalah ({ commit }, payload) {
+      Swal.fire(payload)
+     }
   },
   modules: {
   }

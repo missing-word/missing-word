@@ -1,8 +1,9 @@
 <template>
   <div>
-    <h1 class="mb-3">Hey {{$store.state.username}}, Your Score: {{$store.state.points}}</h1>
-    <h1 class="mb-3">Your Rival Score: {{$store.state.points}}</h1>
-    <h2 v-if="$store.state.isYourTurn === true"> It's Your Turn</h2>
+    <h2 class="mb-3">Hey {{$store.state.username}}, Your Score: {{$store.state.points}}</h2>
+    <h2 class="mb-3" v-if="$store.state.isYourTurn === false">Your Rival Score: {{$store.state.nilaiLawanA}}</h2>
+    <h2 class="mb-3" v-if="$store.state.isYourTurn === true">Your Rival Score: {{$store.state.nilaiLawanB}}</h2>
+    <h3 v-if="$store.state.isYourTurn === true"> It's Your Turn</h3>
       <div class="container d-flex" v-if="$store.state.isAnswer === false">
         <Card1 v-for="(alphabet, i) in alphabets" :key="i" :alphabet="alphabet"></Card1>
       </div>
@@ -65,6 +66,7 @@ export default {
       // clearInterval(this.stopShowAnswer)
     },
     stopShowAnswer () {
+      this.$store.commit('SET_EMPTY_DATA', ['-','-','-','-'])
       this.$store.commit("SET_IS_ANSWER", false)
       // this.$store.commit("SET_IS_ANSWER", true);
       this.answer = ''

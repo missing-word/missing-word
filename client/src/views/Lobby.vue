@@ -3,8 +3,9 @@
     <div class="text-center">
       <h1>Are you ready?</h1>
       <button class="btn btn-dark" @click="ready">Ready</button>
+      <button class="btn btn-dark" @click.prevent="start">Start</button>
     </div>
-     <button @click.prevent="start">start</button>
+     <button class="btn btn-dark" @click.prevent="Start">start</button>
   </div>
 </template>
 
