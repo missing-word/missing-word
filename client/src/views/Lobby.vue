@@ -3,9 +3,8 @@
     <div class="text-center">
       <h1>Are you ready?</h1>
       <button class="btn btn-dark" @click="ready">Ready</button>
-      <button class="btn btn-dark" @click.prevent="start">Start</button>
+      <button v-if="$store.state.letStart === true" class="btn btn-dark ml-3" @click.prevent="start">Start</button>
     </div>
-     <button class="btn btn-dark" @click.prevent="Start">start</button>
   </div>
 </template>
 
@@ -20,7 +19,6 @@ export default {
         status: "ready",
         points: 0
       });
-      // setInterval(this.letsPlay, 3000);
     },
     start () {
       this.$socket.emit('start')

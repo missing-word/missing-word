@@ -17,7 +17,7 @@ export default new Vuex.Store({
     points: 0,
     nilaiLawanA: 0,
     nilaiLawanB: 0,
-    // letStart: false
+    letStart: false
 
   },
   mutations: {
@@ -61,10 +61,10 @@ export default new Vuex.Store({
     },
     SET_EMPTY_DATA (state,payload) {
       state.missingWord = payload
+    },
+    SOCKET_letStart (state, payload){
+      state.letStart = true
     }
-    // SOCKET_letStart (state, payload){
-    
-    // }
   },
   actions: {
     SOCKET_notifBenar ({ commit }, payload) {
