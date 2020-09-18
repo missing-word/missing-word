@@ -4,6 +4,7 @@
       <h1>Are you ready?</h1>
       <button class="btn btn-dark" @click="ready">Ready</button>
     </div>
+     <button @click.prevent="start">start</button>
   </div>
 </template>
 
@@ -16,8 +17,17 @@ export default {
       this.$socket.emit("ready", {
         username: this.$store.state.username,
         status: "ready",
+        points: 0
       });
+      // setInterval(this.letsPlay, 3000);
     },
+    start () {
+      this.$socket.emit('start')
+      setInterval(this.letsPlay, 3000);
+    },
+    letsPlay () {
+      this.$router.push({ name: "Play" })
+    }
   },
 };
 </script>
