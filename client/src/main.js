@@ -5,12 +5,6 @@ import store from './store'
 import 'bootstrap/dist/css/bootstrap.css'
 import VueSocketIO from 'vue-socket.io'
 
-// const song = (require('<songs file>'))
-// if (song){
-//   const audio = new Audio(song)
-//   audio.play()
-// }
-
 Vue.config.productionTip = false
 
 Vue.use(new VueSocketIO({

@@ -1,14 +1,31 @@
 <template>
   <div class="container-fluid background">
-    <div class="input-wrapper d-flex justify-content-center align-items-center">
-      <input
-        class="input-username"
-        v-model="username"
-        placeholder="input your username..."
-        type="text"
-        @keyup.enter="inputUsername"
-      />
+    <div class="input-wrapper flex-column d-flex justify-content-center align-items-center">
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <h1 class="mt-2 mb-5">Missing Word</h1>
+        </div>
+      </div>
+      <div>
+        <input
+          class="input-username"
+          v-model="username"
+          placeholder="input your username..."
+          type="text"
+          @keyup.enter="inputUsername"
+        />
+      </div>
       <div class="ml-2">{{message}}</div>
+      <h2 class="mt-3">How to play</h2>
+      <ol>
+        <li>Input your username</li>
+        <li>Click ready</li>
+        <li>Wait for your rival to ready</li>
+        <li>Then click start when the start button appear</li>
+        <li>Wait for server to random who first turn</li>
+        <li>If your turn is coming, send your word to your rival at least 5 characters</li>
+        <li>The game will over when both player has send 2 word and guessed 2 word</li>
+      </ol>
     </div>
   </div>
 </template>

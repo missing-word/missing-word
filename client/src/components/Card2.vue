@@ -1,12 +1,10 @@
 <template>
   <div class="container">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <div class="card" style="width: 8rem; border-radius: 10px;">
-            <div class="card-body">
-              <h5 class="card-title">{{alphabet1}}</h5>
-            </div>
+    <div class="row">
+      <div class="col">
+        <div class="card" style="width: 3rem; border-radius: 10px;">
+          <div class="card-body p-3">
+            <h5 class="card-title text-center mb-0">{{alphabet1}}</h5>
           </div>
         </div>
       </div>
@@ -16,7 +14,7 @@
 
 <script>
 export default {
-  props: ['alphabet1'],
+  props: ["alphabet1"],
 };
 </script>
 
