@@ -22,7 +22,8 @@ export default {
     },
     start () {
       this.$socket.emit('start')
-      setInterval(this.letsPlay, 3000);
+      // setInterval(this.letsPlay, 3000);
+      this.letsPlay()
     },
     letsPlay () {
       this.$router.push({ name: "Play" })

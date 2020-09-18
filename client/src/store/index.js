@@ -15,8 +15,7 @@ export default new Vuex.Store({
     answer: '',
     username: '',
     points: 0,
-    nilaiLawanA: 0,
-    nilaiLawanB: 0,
+    nilaiLawan: 0,
     letStart: false
 
   },
@@ -52,11 +51,11 @@ export default new Vuex.Store({
       state.username = username;
     },
     SOCKET_salah (state,payload) {
-      state.nilaiLawanA += 10
+      state.nilaiLawan += 10
       Swal.fire(payload)
     },
     SOCKET_benar (state,payload) {
-      state.nilaiLawanB += 10
+      state.nilaiLawan += 10
       Swal.fire(payload)
     },
     SET_EMPTY_DATA (state,payload) {
@@ -64,6 +63,28 @@ export default new Vuex.Store({
     },
     SOCKET_letStart (state, payload){
       state.letStart = true
+    },
+    SOCKET_changeTurn (state, payload) {
+      if(state.username === payload){
+        state.isYourTurn = true
+      }else{
+        state.isYourTurn = false
+      }
+    },
+    SOCKET_startGame (state, payload){
+      state.letStart = payload
+    },
+    gameOver (state, payload) {
+      state.notif = true
+      state.isYourTurn = true
+      state.isAnswer = false
+      state.word = []
+      state.missingWord = []
+      state.answer = ''
+      state.username = ''
+      state.points = 0
+      state.nilaiLawan = 0
+      state.letStart = false
     }
   },
   actions: {
@@ -72,7 +93,16 @@ export default new Vuex.Store({
     },
     SOCKET_notifSalah ({ commit }, payload) {
       Swal.fire(payload)
-     }
+    },
+    SOCKET_gameOver ({ commit }, payload) {
+      Swal.fire(payload)
+      .then((result) => {
+        if(result.isConfirmed){
+          router.push({ name: 'Home'})
+          commit('gameOver')
+        }
+      })
+    }
   },
   modules: {
   }

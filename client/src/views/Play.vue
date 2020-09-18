@@ -1,9 +1,8 @@
 <template>
   <div>
     <h2 class="mb-3">Hey {{$store.state.username}}, Your Score: {{$store.state.points}}</h2>
-    <h2 class="mb-3" v-if="$store.state.isYourTurn === false">Your Rival Score: {{$store.state.nilaiLawanA}}</h2>
-    <h2 class="mb-3" v-if="$store.state.isYourTurn === true">Your Rival Score: {{$store.state.nilaiLawanB}}</h2>
-    <h3 v-if="$store.state.isYourTurn === true"> It's Your Turn</h3>
+    <h2 class="mb-3" >Your Rival Score: {{$store.state.nilaiLawan}}</h2>
+    <h3 v-if="$store.state.isYourTurn === true"> It's Your Turn! Send word to rival</h3>
       <div class="container d-flex" v-if="$store.state.isAnswer === false">
         <Card1 v-for="(alphabet, i) in alphabets" :key="i" :alphabet="alphabet"></Card1>
       </div>
@@ -13,14 +12,14 @@
     <div class="container mt-5" v-if="$store.state.isYourTurn === true"> 
       <div class="input-group">
         <input type="text" class="form-control" v-model="word" placeholder="Write your word here ..."/>
-        <button type="submit" class="btn btn-primary btn-block mt-3" @click.prevent="sendWord">Submit</button>
+        <button type="submit" class="btn btn-primary btn-block mt-3" @click.prevent="sendWord">Send Question</button>
       </div>
     </div>
      <div class="container mt-5" v-if="$store.state.isYourTurn === false">
        <p v-if="$store.state.notif === true">lawan sedang mengetik soal untuk anda ...</p>
       <div class="input-group">
         <input type="text" class="form-control" v-model="answer" placeholder="Write your answer here ..." />
-        <button type="submit" class="btn btn-primary btn-block mt-3" @click.prevent="sendAnswer">Submit</button>
+        <button type="submit" class="btn btn-primary btn-block mt-3" @click.prevent="sendAnswer">Send Answer</button>
       </div>
     </div>
   </div>
@@ -66,7 +65,7 @@ export default {
       // clearInterval(this.stopShowAnswer)
     },
     stopShowAnswer () {
-      this.$store.commit('SET_EMPTY_DATA', ['-','-','-','-'])
+      this.$store.commit('SET_EMPTY_DATA', [])
       this.$store.commit("SET_IS_ANSWER", false)
       // this.$store.commit("SET_IS_ANSWER", true);
       this.answer = ''
