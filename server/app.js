@@ -84,7 +84,7 @@ io.on("connection", (socket) => {
     console.log(player);
     console.log(matchRound, '<<< game round');
     io.emit('changeTurn', payload.username)
-    if(matchRound == 2){
+    if(matchRound == 4){
       let points = 0
       let winner = ''
       for(const el of player){
